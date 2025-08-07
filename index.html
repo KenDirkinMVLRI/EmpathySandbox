@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Storytelling Workshop - IDEO Design Thinking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f3fafc;
+            min-height: 100vh;
+            color: #091d20;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            display: none;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(9,29,32,0.1);
+            padding: 40px;
+            margin-bottom: 20px;
+            min-height: 70vh;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .slide-number {
+            background: #115e6e;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        h1 {
+            color: #091d20;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            color: #115e6e;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            color: #093c44;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        h4 {
+            color: #093c44;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #6d6e71;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .tip-card {
+            background: #2f8d98;
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .tip-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .emotion-card {
+            background: #c7dee0;
+            color: #091d20;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid #115e6e;
+        }
+        
+        .story-example {
+            background: #fff4e7;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f7941e;
+        }
+        
+        .empathy-technique {
+            background: #f3fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border: 2px solid #2f8d98;
+        }
+        
+        .empathy-exercise {
+            background: #ffffff;
+            border: 2px solid #a84c2a;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .timer {
+            background: #a84c2a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timer:hover {
+            background: #f7941e;
+        }
+        
+        .timer.running {
+            background: #6a7f17;
+        }
+        
+        .activity-box {
+            background: #f3fafc;
+            border-left: 4px solid #115e6e;
+            padding: 24px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .prompt-box {
+            background: #fff4e7;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #f7941e;
+        }
+        
+        .breakout-instruction {
+            background: #2f8d98;
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(9,29,32,0.2);
+            border: 1px solid #c7dee0;
+        }
+        
+        .btn {
+            background: #115e6e;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 8px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2f8d98;
+        }
+        
+        .btn:disabled {
+            background: #6d6e71;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            color: #115e6e;
+            font-weight: 600;
+            margin: 0 16px;
+            font-size: 16px;
+        }
+        
+        .progress-bar {
+            background: #c7dee0;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: #115e6e;
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .emoji-reaction {
+            font-size: 2rem;
+            margin: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .emoji-reaction:hover {
+            transform: scale(1.2);
+        }
+        
+        .interactive-element {
+            background: #ffffff;
+            border: 2px dashed #2f8d98;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .highlight {
+            background: #fff4e7;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 20px 0;
+        }
+        
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+        }
+        
+        strong {
+            color: #093c44;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .slide {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .two-column, .three-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                bottom: 12px;
+                padding: 12px 16px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+                margin: 0 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 7%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">1 of 15</div>
+                <h1>Emotional Storytelling</h1>
+                <p class="subtitle">Deep Dive into IDEO's "Get Emotional" Framework<br>
+                45-Minute Interactive Workshop</p>
+            </div>
+            <div class="activity-box">
+                <h3>Today's Emotional Journey</h3>
+                <ul>
+                    <li><strong>Focus:</strong> Mastering emotional connection in stories</li>
+                    <li><strong>Method:</strong> Sandbox the same story with different emotions</li>
+                    <li><strong>Practice:</strong> Deep empathy and vulnerability</li>
+                    <li><strong>Outcome:</strong> Transform how you move audiences to action</li>
+                </ul>
+            </div>
+            <div class="interactive-element">
+                <h3>🎭 Emotion Check-In</h3>
+                <p>What emotion do you want to explore more deeply in your storytelling?</p>
+                <div>
+                    <span class="emoji-reaction" onclick="react(this)" title="Joy">😊</span>
+                    <span class="emoji-reaction" onclick="react(this)" title="Curiosity">🤔</span>
+                    <span class="emoji-reaction" onclick="react(this)" title="Excitement">🚀</span>
+                    <span class="emoji-reaction" onclick="react(this)" title="Nervousness">😅</span>
+                    <span class="emoji-reaction" onclick="react(this)" title="Determination">💪</span>
+                    <span class="emoji-reaction" onclick="react(this)" title="Empathy">❤️</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Power of Emotion -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 13%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">2 of 15</div>
+                <h2>Why Emotion is Everything</h2>
+            </div>
+            <div class="two-column">
+                <div>
+                    <h3>🧠 The Science</h3>
+                    <ul>
+                        <li>Emotions are processed 5x faster than rational thought</li>
+                        <li>We remember emotional experiences 3x longer</li>
+                        <li>95% of purchasing decisions are emotional</li>
+                        <li>Stories with emotion increase neural activity by 30%</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💼 The Business Impact</h3>
+                    <ul>
+                        <li>Emotional ads perform 2x better</li>
+                        <li>Emotionally connected customers have 2x lifetime value</li>
+                        <li>Teams with emotional intelligence are 20% more effective</li>
+                        <li>Emotional presentations get 30% more buy-in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="emotion-card">
+                <h3>🎯 Today's Challenge</h3>
+                <p>You'll take one story and tell it through three completely different emotional lenses. This isn't just about changing your tone—it's about fundamentally shifting how your audience <em>feels</em> and therefore how they <em>act</em>.</p>
+            </div>
+            <div class="interactive-element">
+                <h3>🤯 Mind Experiment</h3>
+                <p>Think about the last time someone convinced you to change your mind. Was it because of their logic... or because of how they made you <strong>feel</strong>?</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Emotional Sandbox Method -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">3 of 15</div>
+                <h2>The Emotional Sandbox Method</h2>
+            </div>
+            <div class="prompt-box">
+                <h3>🏗️ How It Works</h3>
+                <p>Take one factual story and rebuild it through <strong>three different emotional frameworks</strong>. Same events, completely different emotional impact.</p>
+            </div>
+            <div class="three-column">
+                <div class="emotion-card">
+                    <h3>📖 Step 1: Choose Story</h3>
+                    <p>Select one educational scenario from our provided examples</p>
+                </div>
+                <div class="emotion-card">
+                    <h3>🎭 Step 2: Pick Emotions</h3>
+                    <p>Choose three distinct emotional states to explore</p>
+                </div>
+                <div class="emotion-card">
+                    <h3>🎪 Step 3: Perform</h3>
+                    <p>Tell the same story three different ways, fully embodying each emotion</p>
+                </div>
+            </div>
+            <div class="empathy-technique">
+                <h3>🧘 Deep Empathy Preparation</h3>
+                <p><strong>Before each story version, you'll spend 2 minutes in emotional preparation:</strong></p>
+                <ul>
+                    <li>Close your eyes and recall a time you felt this emotion intensely</li>
+                    <li>Notice where you feel it in your body</li>
+                    <li>Let that feeling inform your voice, posture, and word choice</li>
+                    <li>Ask: "If I felt this way about the situation, what would matter most to me?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Story Examples -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 27%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">4 of 15</div>
+                <h2>Choose Your Story Scenario</h2>
+            </div>
+            <div class="story-example">
+                <h3>🎓 Scenario A: The Failed Group Project</h3>
+                <p><strong>The Facts:</strong> You're working on a semester-long group project for your MBA program. One team member, Sarah, hasn't contributed to the past three meetings and missed two deadlines. The project is worth 40% of your grade, and it's due in one week. You need to address this with Sarah and decide whether to involve the professor.</p>
+            </div>
+            <div class="story-example">
+                <h3>💻 Scenario B: The Technology Implementation</h3>
+                <p><strong>The Facts:</strong> Your company has decided to implement a new learning management system that will replace the current platform everyone has used for three years. As the project lead, you must train 150 staff members on the new system within six weeks. Several veteran employees have expressed resistance, saying the old system "works just fine" and they don't want to learn something new.</p>
+            </div>
+            <div class="story-example">
+                <h3>🎨 Scenario C: The Innovation Rejection</h3>
+                <p><strong>The Facts:</strong> You spent six months developing a new product idea that could revolutionize your company's approach to customer service. You presented it to the executive team last month with thorough research and a detailed implementation plan. Yesterday, you received an email that the project has been shelved due to "other priorities" with no further explanation or feedback.</p>
+            </div>
+            <div class="story-example">
+                <h3>📚 Scenario D: The Mentor's Dilemma</h3>
+                <p><strong>The Facts:</strong> You're mentoring a promising junior colleague, Alex, who just received an offer from a competitor for a 50% salary increase and better growth opportunities. Alex is asking for your advice. You know that if Alex leaves, it will significantly impact your department's current project and create more work for you, but you also want what's best for Alex's career.</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Emotional States Menu -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 33%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">5 of 15</div>
+                <h2>Your Emotional Palette</h2>
+            </div>
+            <div class="prompt-box">
+                <h3>🎨 Choose Three Different Emotional States</h3>
+                <p>Each emotion will completely change how you tell your story and what action you're asking for.</p>
+            </div>
+            <div class="three-column">
+                <div>
+                    <div class="emotion-card">
+                        <h4>😤 Frustration/Anger</h4>
+                        <p>Injustice, urgency, need for immediate change</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>😟 Worry/Anxiety</h4>
+                        <p>Concern for consequences, need for support</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>😢 Disappointment</h4>
+                        <p>Unmet expectations, need for understanding</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="emotion-card">
+                        <h4>😊 Hope/Optimism</h4>
+                        <p>Possibility, vision for better future</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>🤔 Curiosity</h4>
+                        <p>Learning opportunity, exploration needed</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>💪 Determination</h4>
+                        <p>Resilience, commitment to overcome</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="emotion-card">
+                        <h4>😔 Empathy/Compassion</h4>
+                        <p>Understanding others, need for connection</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>🎉 Excitement</h4>
+                        <p>Opportunity, energy for action</p>
+                    </div>
+                    <div class="emotion-card">
+                        <h4>😌 Acceptance/Wisdom</h4>
+                        <p>Learning from experience, peaceful resolution</p>
+                    </div>
+                </div>
+            </div>
+            <div class="interactive-element">
+                <h3>⚡ Selection Strategy</h3>
+                <p><strong>Pick three emotions that would lead to completely different solutions or actions!</strong> The more contrast, the more powerful your learning.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Empathy Deep Dive -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">6 of 15</div>
+                <h2>Accessing Deep Empathy</h2>
+            </div>
+            <div class="empathy-exercise">
+                <h3>🧘 The Emotional Memory Technique</h3>
+                <p><strong>For each emotion you'll explore, use this 3-step process:</strong></p>
+                <ol>
+                    <li><strong>Recall:</strong> Remember a specific time you felt this emotion intensely</li>
+                    <li><strong>Embody:</strong> Notice where you feel it physically (chest, stomach, shoulders?)</li>
+                    <li><strong>Channel:</strong> Let that physical sensation inform your storytelling</li>
+                </ol>
+            </div>
+            <div class="two-column">
+                <div class="empathy-technique">
+                    <h4>🎭 Voice & Body Shifts</h4>
+                    <ul>
+                        <li><strong>Anger:</strong> Faster pace, sharper consonants, forward posture</li>
+                        <li><strong>Sadness:</strong> Slower rhythm, softer volume, slumped shoulders</li>
+                        <li><strong>Hope:</strong> Rising intonation, open gestures, lifted chest</li>
+                        <li><strong>Fear:</strong> Tighter voice, protective posture, quick glances</li>
+                    </ul>
+                </div>
+                <div class="empathy-technique">
+                    <h4>💭 Perspective Shifts</h4>
+                    <ul>
+                        <li><strong>What would someone feeling this emotion focus on?</strong></li>
+                        <li><strong>What details would matter most to them?</strong></li>
+                        <li><strong>What would they need from others?</strong></li>
+                        <li><strong>What action would feel most urgent?</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="interactive-element">
+                <h3>🎪 Practice Moment</h3>
+                <p>Say "I need your help" in three different emotional states. Notice how the same words carry completely different meaning based on your emotional state.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: The Vulnerability Factor -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 47%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">7 of 15</div>
+                <h2>Embracing Vulnerability</h2>
+            </div>
+            <div class="tip-card">
+                <h3>💝 Why Vulnerability Creates Connection</h3>
+                <p>When you share genuine emotion, you give others permission to feel. This creates trust, relatability, and the foundation for influence.</p>
+            </div>
+            <div class="two-column">
+                <div>
+                    <h3>🚫 Emotional Blocks to Release</h3>
+                    <ul>
+                        <li>"I need to stay professional"</li>
+                        <li>"They'll think I'm weak"</li>
+                        <li>"I should have it all figured out"</li>
+                        <li>"Leaders don't show uncertainty"</li>
+                        <li>"It's not appropriate to get personal"</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>✅ Empowering Reframes</h3>
+                    <ul>
+                        <li>"Authenticity builds trust"</li>
+                        <li>"Vulnerability shows strength"</li>
+                        <li>"Learning in public inspires others"</li>
+                        <li>"Human leaders create connection"</li>
+                        <li>"Personal stories drive action"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="empathy-exercise">
+                <h3>🔓 Vulnerability Starters</h3>
+                <p><strong>Use these phrases to open emotional doorways:</strong></p>
+                <ul>
+                    <li>"I have to be honest with you..."</li>
+                    <li>"What scared me most was..."</li>
+                    <li>"I felt completely lost when..."</li>
+                    <li>"The part that hurt the most..."</li>
+                    <li>"I was so excited that..."</li>
+                    <li>"I couldn't sleep because..."</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Team Formation -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 53%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">8 of 15</div>
+                <h2>Form Your Emotional Exploration Teams</h2>
+            </div>
+            <div class="breakout-instruction">
+                <h3>👥 Team Setup (5 minutes)</h3>
+                <ul>
+                    <li><strong>Teams of 3-4 people</strong></li>
+                    <li><strong>Choose one scenario</strong> that resonates with your team</li>
+                    <li><strong>Select three contrasting emotions</strong> to explore</li>
+                    <li><strong>Assign roles:</strong> One person per emotion + one observer/timekeeper</li>
+                </ul>
+            </div>
+            <div class="two-column">
+                <div class="activity-box">
+                    <h4>📋 Team Decision Checklist</h4>
+                    <ul>
+                        <li>Which scenario feels most relevant to your experiences?</li>
+                        <li>Which emotions would create the most contrast?</li>
+                        <li>Who wants to explore which emotional state?</li>
+                        <li>Who will be your supportive observer?</li>
+                    </ul>
+                </div>
+                <div class="emotion-card">
+                    <h4>🎯 Success Criteria</h4>
+                    <p>By the end, each person should feel like they've <strong>genuinely embodied</strong> their chosen emotion and told a story that would move their audience to completely different actions.</p>
+                </div>
+            </div>
+            <div class="timer" onclick="startTimer(5)">
+                🚀 Start 5-Minute Team Formation Timer
+            </div>
+        </div>
+
+        <!-- Slide 9: Emotional Preparation Ritual -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">9 of 15</div>
+                <h2>Emotional Preparation Ritual</h2>
+            </div>
+            <div class="empathy-exercise">
+                <h3>🧘 2-Minute Individual Prep (Before Each Story)</h3>
+                <p><strong>Each storyteller will use this process before their turn:</strong></p>
+                <ol>
+                    <li><strong>Eyes closed, deep breath</strong></li>
+                    <li><strong>Recall a personal time you felt this emotion deeply</strong></li>
+                    <li><strong>Notice where you feel it in your body</strong></li>
+                    <li><strong>Let that feeling settle in</strong></li>
+                    <li><strong>Open eyes, stay connected to that emotion</strong></li>
+                </ol>
+            </div>
+            <div class="three-column">
+                <div class="emotion-card">
+                    <h4>🎭 Round 1</h4>
+                    <p><strong>2 min prep</strong><br>
+                    <strong>3 min story</strong><br>
+                    <strong>2 min feedback</strong></p>
+                </div>
+                <div class="emotion-card">
+                    <h4>🎪 Round 2</h4>
+                    <p><strong>2 min prep</strong><br>
+                    <strong>3 min story</strong><br>
+                    <strong>2 min feedback</strong></p>
+                </div>
+                <div class="emotion-card">
+                    <h4>🎨 Round 3</h4>
+                    <p><strong>2 min prep</strong><br>
+                    <strong>3 min story</strong><br>
+                    <strong>2 min feedback</strong></p>
+                </div>
+            </div>
+            <div class="prompt-box">
+                <h3>🔍 Observer's Role</h3>
+                <p><strong>Watch for:</strong> Changes in voice, posture, word choice, and energy. Notice how the same facts create completely different stories when filtered through different emotions.</p>
+            </div>
+            <div class="interactive-element">
+                <h3>⚡ Ready Check</h3>
+                <p>Teams, give a thumbs up when you're ready to begin your emotional storytelling journey!</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Main Activity Timer -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 67%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">10 of 15</div>
+                <h2>🎭 Emotional Storytelling In Action</h2>
+            </div>
+            <div style="text-align: center; margin: 50px 0;">
+                <h1 style="font-size: 4rem; color: #115e6e;">21:00</h1>
+                <h3>Total Activity Time</h3>
+                <p><em>7 minutes per round × 3 rounds</em></p>
+            </div>
+            <div class="breakout-instruction">
+                <h3>🎪 Your Emotional Journey</h3>
+                <ul>
+                    <li><strong>Each person takes a turn</strong> telling the same story through their chosen emotion</li>
+                    <li><strong>Really commit</strong> to the emotional state—let it inform everything</li>
+                    <li><strong>Notice how</strong> different emotions lead to different calls to action</li>
+                    <li><strong>Give authentic feedback</strong> about what you felt and what moved you</li>
+                </ul>
+            </div>
+            <div class="timer" onclick="startTimer(21)">
+                🎬 Start 21-Minute Storytelling Timer
+            </div>
+            <div class="emotion-card">
+                <h3>💡 Remember</h3>
+                <p>This isn't acting—it's authentic exploration of how emotion shapes perspective and action. Let yourself genuinely feel and express each emotional state.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Debrief Questions -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 73%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">11 of 15</div>
+                <h2>Team Debrief & Insights</h2>
+            </div>
+            <div class="empathy-exercise">
+                <h3>🔄 Reflection Questions (8 minutes)</h3>
+                <p><strong>Discuss in your teams:</strong></p>
+                <ul>
+                    <li>How did the <strong>same story</strong> become completely different stories?</li>
+                    <li>Which <strong>emotional version</strong> felt most authentic to you?</li>
+                    <li>What <strong>different actions</strong> did each emotion call for?</li>
+                    <li>Which version would be most <strong>persuasive</strong> to different audiences?</li>
+                    <li>What surprised you about <strong>accessing these emotions?</strong></li>
+                </ul>
+            </div>
+            <div class="two-column">
+                <div class="tip-card">
+                    <h4>🎯 Key Insights to Capture</h4>
+                    <ul>
+                        <li>How emotion changes the story focus</li>
+                        <li>Different calls to action for each emotion</li>
+                        <li>Which emotions felt most/least natural</li>
+                        <li>Physical changes you noticed</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🚀 Application Ideas</h4>
+                    <ul>
+                        <li>When would you use each emotional approach?</li>
+                        <li>What audiences respond to different emotions?</li>
+                        <li>How will this change your presentations?</li>
+                        <li>What emotions do you want to practice more?</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timer" onclick="startTimer(8)">
+                💭 Start 8-Minute Debrief Timer
+            </div>
+        </div>
+
+        <!-- Slide 12: Full Group Share -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">12 of 15</div>
+                <h2>Share Your Emotional Discoveries</h2>
+            </div>
+            <div class="prompt-box">
+                <h3>🎤 Volunteer Shares (8 minutes)</h3>
+                <p><strong>2-3 teams share their biggest insights:</strong></p>
+                <ul>
+                    <li>Which emotional version was most surprising?</li>
+                    <li>How did emotion change the call to action?</li>
+                    <li>What did you discover about your own emotional range?</li>
+                </ul>
+            </div>
+            <div class="interactive-element">
+                <h3>🌟 Live Demonstration</h3>
+                <p><strong>Brave volunteer:</strong> Show us 30 seconds of the same story moment in two different emotional states!</p>
+            </div>
+            <div class="two-column">
+                <div class="emotion-card">
+                    <h4>👂 Active Listening</h4>
+                    <p>As you listen to other teams, notice:</p>
+                    <ul>
+                        <li>Which emotions resonate with you most?</li>
+                        <li>What patterns do you hear across teams?</li>
+                        <li>Which stories make you want to take action?</li>
+                    </ul>
+                </div>
+                <div class="timer" onclick="startTimer(8)">
+                    🎙️ Start 8-Minute Sharing Timer
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: The Science Behind What You Experienced -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 87%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">13 of 15</div>
+                <h2>The Science Behind Your Experience</h2>
+            </div>
+            <div class="tip-card">
+                <h3>🧠 What Just Happened in Your Brain</h3>
+                <p>You activated different neural pathways by embodying different emotions. Each emotional state literally changed how you processed and presented the same information.</p>
+            </div>
+            <div class="two-column">
+                <div>
+                    <h3>🔬 Neurological Impact</h3>
+                    <ul>
+                        <li><strong>Amygdala activation</strong> influenced memory recall</li>
+                        <li><strong>Prefrontal cortex</strong> shaped story structure</li>
+                        <li><strong>Mirror neurons</strong> in listeners created empathy</li>
+                        <li><strong>Hormonal releases</strong> affected audience connection</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💼 Practical Applications</h3>
+                    <ul>
+                        <li><strong>Match emotion to outcome</strong> you want</li>
+                        <li><strong>Use urgency</strong> for immediate action</li>
+                        <li><strong>Use hope</strong> for long-term buy-in</li>
+                        <li><strong>Use empathy</strong> for collaboration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="empathy-exercise">
+                <h3>🎯 Emotional Strategy Framework</h3>
+                <p><strong>Before your next important conversation, ask:</strong></p>
+                <ul>
+                    <li>What emotion would best serve my audience and goal?</li>
+                    <li>How can I authentically access and convey that emotion?</li>
+                    <li>What would someone feeling this emotion need to hear?</li>
+                    <li>What action would naturally flow from this emotional state?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: Integration & Action Planning -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 93%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">14 of 15</div>
+                <h2>Integrate & Apply Your Learning</h2>
+            </div>
+            <div class="prompt-box">
+                <h3>📝 Personal Emotional Storytelling Plan</h3>
+                <p><strong>Complete these commitments:</strong></p>
+            </div>
+            <div class="three-column">
+                <div class="emotion-card">
+                    <h4>🎯 Next Week</h4>
+                    <p><strong>"I will use emotional storytelling in..."</strong></p>
+                    <p><em>(specific situation)</em></p>
+                </div>
+                <div class="emotion-card">
+                    <h4>💪 Emotion to Practice</h4>
+                    <p><strong>"The emotion I want to get better at expressing is..."</strong></p>
+                    <p><em>(and why)</em></p>
+                </div>
+                <div class="emotion-card">
+                    <h4>🚀 One Change</h4>
+                    <p><strong>"The biggest change to my communication will be..."</strong></p>
+                    <p><em>(specific shift)</em></p>
+                </div>
+            </div>
+            <div class="two-column">
+                <div class="empathy-technique">
+                    <h4>🔄 Daily Practice</h4>
+                    <ul>
+                        <li>Before important conversations, ask: "What emotion would serve here?"</li>
+                        <li>Practice the 2-minute emotional preparation ritual</li>
+                        <li>Notice your emotional defaults and experiment with alternatives</li>
+                        <li>Pay attention to how others respond to different emotional approaches</li>
+                    </ul>
+                </div>
+                <div class="empathy-technique">
+                    <h4>📚 Continued Learning</h4>
+                    <ul>
+                        <li>Keep an "emotion journal" of storytelling experiments</li>
+                        <li>Practice vulnerable sharing in low-stakes situations</li>
+                        <li>Ask trusted colleagues for feedback on your emotional range</li>
+                        <li>Study speakers/leaders who excel at emotional connection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Closing -->
+        <div class="slide">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="header">
+                <div class="slide-number">15 of 15</div>
+                <h2>Your Emotional Storytelling Journey Begins</h2>
+            </div>
+            <div class="tip-card">
+                <h3>🌟 What You've Accomplished Today</h3>
+                <p>You've experienced firsthand how the same story becomes completely different when told through different emotional lenses. You've practiced vulnerability, empathy, and authentic emotional expression.</p>
+            </div>
+            <div class="two-column">
+                <div class="emotion-card">
+                    <h4>💝 Key Takeaways</h4>
+                    <ul>
+                        <li>Emotion drives action more than logic</li>
+                        <li>The same facts can tell completely different stories</li>
+                        <li>Vulnerability creates connection and trust</li>
+                        <li>Physical preparation unlocks emotional authenticity</li>
+                        <li>Different emotions call for different actions</li>
+                    </ul>
+                </div>
+                <div class="emotion-card">
+                    <h4>🚀 Your Emotional Toolkit</h4>
+                    <ul>
+                        <li>2-minute emotional preparation ritual</li>
+                        <li>Vulnerability starters for authentic sharing</li>
+                        <li>Strategy framework for choosing emotions</li>
+                        <li>Body awareness for emotional embodiment</li>
+                        <li>Empathy techniques for deeper connection</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="empathy-exercise" style="text-align: center; font-size: 1.2rem; margin-top: 40px;">
+                <h3>🎭 Final Challenge</h3>
+                <p><strong>Your mission: Use what you learned today in a real conversation within 48 hours.</strong></p>
+                <p>Choose your emotion intentionally. Prepare authentically. Share vulnerably. Notice the difference.</p>
+                <p style="margin-top: 30px; font-size: 2rem;">The world needs your authentic emotional stories! 🌟</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> of <span id="totalSlides">15</span>
+        </span>
+        <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let timerInterval;
+        let remainingTime = 0;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (n + totalSlides) % totalSlides;
+            slides[currentSlideIndex].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        function changeSlide(n) {
+            if (currentSlideIndex + n >= 0 && currentSlideIndex + n < totalSlides) {
+                showSlide(currentSlideIndex + n);
+            }
+        }
+
+        function react(element) {
+            element.style.transform = 'scale(1.5)';
+            element.style.color = '#115e6e';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.color = 'initial';
+            }, 300);
+        }
+
+        function startTimer(minutes) {
+            const timerElement = event.target;
+            remainingTime = minutes * 60;
+            
+            timerElement.classList.add('running');
+            timerElement.style.cursor = 'default';
+            
+            timerInterval = setInterval(() => {
+                const minutesLeft = Math.floor(remainingTime / 60);
+                const secondsLeft = remainingTime % 60;
+                
+                timerElement.innerHTML = `${minutesLeft}:${secondsLeft.toString().padStart(2, '0')}`;
+                
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = '⏰ Time\'s Up!';
+                    timerElement.style.background = '#a84c2a';
+                    timerElement.classList.remove('running');
+                    timerElement.style.cursor = 'pointer';
+                    
+                    // Flash the timer
+                    let flashCount = 0;
+                    const flashInterval = setInterval(() => {
+                        timerElement.style.background = flashCount % 2 === 0 ? '#a84c2a' : '#f7941e';
+                        flashCount++;
+                        if (flashCount > 6) {
+                            clearInterval(flashInterval);
+                            timerElement.style.background = '#a84c2a';
+                        }
+                    }, 500);
+                }
+                
+                remainingTime--;
+            }, 1000);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === ' ') e.preventDefault(); // Prevent space from scrolling
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
